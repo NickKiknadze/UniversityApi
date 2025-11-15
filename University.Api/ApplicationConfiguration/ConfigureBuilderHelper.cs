@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using University.Application;
-using University.Application.Services;
-using University.Data;
 using University.Data.Data;
 
 namespace University.Api.ApplicationConfiguration;
