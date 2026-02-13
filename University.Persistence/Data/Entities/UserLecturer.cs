@@ -2,7 +2,7 @@
 
 namespace University.Data.Data.Entities;
 
-[Table("UsersLecturers", Schema = "university")]
+[Table("UsersLecturers", Schema = "dbo")]
 public sealed class UserLecturer
 {
     public int UserId { get; set; }

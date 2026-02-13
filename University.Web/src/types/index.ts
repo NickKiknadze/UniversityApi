@@ -12,6 +12,18 @@ export interface AuthTokenResponse {
     refreshTokenExpiresIn?: number;
 }
 
+export interface ApiResponse<T> {
+    success: boolean;
+    message?: string;
+    innerException?: string;
+    data?: T;
+}
+
+export interface GetDtoWithCount<T> {
+    data: T;
+    count: number;
+}
+
 // Common
 export interface PagedResult<T> {
     items: T[];

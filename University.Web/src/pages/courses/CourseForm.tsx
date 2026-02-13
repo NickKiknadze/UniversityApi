@@ -100,7 +100,7 @@ export const CourseForm: React.FC<CourseFormProps> = ({ isOpen, onClose, initial
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Assign Faculties</label>
                             <div className="border border-gray-300 rounded-md max-h-48 overflow-y-auto p-2">
-                                {faculties?.items?.map((faculty: any) => (
+                                {faculties?.data?.map((faculty: any) => (
                                     <div
                                         key={faculty.id}
                                         className="flex items-center p-2 hover:bg-gray-50 cursor-pointer"
@@ -118,7 +118,7 @@ export const CourseForm: React.FC<CourseFormProps> = ({ isOpen, onClose, initial
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Assign Lecturers</label>
                             <div className="border border-gray-300 rounded-md max-h-48 overflow-y-auto p-2">
-                                {lecturers?.items?.map((lecturer: any) => (
+                                {lecturers?.data?.map((lecturer: any) => (
                                     <div
                                         key={lecturer.id}
                                         className="flex items-center p-2 hover:bg-gray-50 cursor-pointer"

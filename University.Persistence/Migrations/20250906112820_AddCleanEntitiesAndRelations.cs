@@ -11,14 +11,14 @@ namespace University.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "university");
+                name: "dbo");
 
             migrationBuilder.EnsureSchema(
-                name: "ums");
+                name: "dbo");
 
             migrationBuilder.CreateTable(
                 name: "Courses",
-                schema: "university",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -33,7 +33,7 @@ namespace University.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Faculties",
-                schema: "university",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -48,7 +48,7 @@ namespace University.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Lecturers",
-                schema: "ums",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -65,7 +65,7 @@ namespace University.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Users",
-                schema: "ums",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -81,7 +81,7 @@ namespace University.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "FacultyCourse",
-                schema: "university",
+                schema: "dbo",
                 columns: table => new
                 {
                     FacultyId = table.Column<int>(type: "int", nullable: false),
@@ -93,14 +93,14 @@ namespace University.Data.Migrations
                     table.ForeignKey(
                         name: "FK_FacultyCourse_Courses_CourseId",
                         column: x => x.CourseId,
-                        principalSchema: "university",
+                        principalSchema: "dbo",
                         principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_FacultyCourse_Faculties_FacultyId",
                         column: x => x.FacultyId,
-                        principalSchema: "university",
+                        principalSchema: "dbo",
                         principalTable: "Faculties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -108,7 +108,7 @@ namespace University.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "CoursesLecturers",
-                schema: "university",
+                schema: "dbo",
                 columns: table => new
                 {
                     CourseId = table.Column<int>(type: "int", nullable: false),
@@ -120,14 +120,14 @@ namespace University.Data.Migrations
                     table.ForeignKey(
                         name: "FK_CoursesLecturers_Courses_CourseId",
                         column: x => x.CourseId,
-                        principalSchema: "university",
+                        principalSchema: "dbo",
                         principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CoursesLecturers_Lecturers_LectureId",
                         column: x => x.LectureId,
-                        principalSchema: "ums",
+                        principalSchema: "dbo",
                         principalTable: "Lecturers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -135,7 +135,7 @@ namespace University.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserProfiles",
-                schema: "ums",
+                schema: "dbo",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -152,14 +152,14 @@ namespace University.Data.Migrations
                     table.ForeignKey(
                         name: "FK_UserProfiles_Faculties_FacultyId",
                         column: x => x.FacultyId,
-                        principalSchema: "university",
+                        principalSchema: "dbo",
                         principalTable: "Faculties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserProfiles_Users_UserId",
                         column: x => x.UserId,
-                        principalSchema: "ums",
+                        principalSchema: "dbo",
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -167,7 +167,7 @@ namespace University.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UsersCourses",
-                schema: "university",
+                schema: "dbo",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
@@ -179,14 +179,14 @@ namespace University.Data.Migrations
                     table.ForeignKey(
                         name: "FK_UsersCourses_Courses_CourseId",
                         column: x => x.CourseId,
-                        principalSchema: "university",
+                        principalSchema: "dbo",
                         principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UsersCourses_Users_UserId",
                         column: x => x.UserId,
-                        principalSchema: "ums",
+                        principalSchema: "dbo",
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -194,7 +194,7 @@ namespace University.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UsersLecturers",
-                schema: "university",
+                schema: "dbo",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
@@ -206,14 +206,14 @@ namespace University.Data.Migrations
                     table.ForeignKey(
                         name: "FK_UsersLecturers_Lecturers_LecturerId",
                         column: x => x.LecturerId,
-                        principalSchema: "ums",
+                        principalSchema: "dbo",
                         principalTable: "Lecturers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UsersLecturers_Users_UserId",
                         column: x => x.UserId,
-                        principalSchema: "ums",
+                        principalSchema: "dbo",
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -221,63 +221,67 @@ namespace University.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_CoursesLecturers_LectureId",
-                schema: "university",
+                schema: "dbo",
                 table: "CoursesLecturers",
                 column: "LectureId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FacultyCourse_FacultyId",
-                schema: "university",
+                schema: "dbo",
                 table: "FacultyCourse",
                 column: "FacultyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserProfiles_FacultyId",
-                schema: "ums",
+                schema: "dbo",
                 table: "UserProfiles",
                 column: "FacultyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserProfiles_UserId",
-                schema: "ums",
+                schema: "dbo",
                 table: "UserProfiles",
                 column: "UserId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsersCourses_CourseId",
-                schema: "university",
+                schema: "dbo",
                 table: "UsersCourses",
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsersLecturers_LecturerId",
-                schema: "university",
+                schema: "dbo",
                 table: "UsersLecturers",
                 column: "LecturerId");
-            
+
             migrationBuilder.InsertData(
-                schema: "ums",
+                schema: "dbo",
                 table: "Users",
                 columns: new[] { "Id", "Username", "PasswordHash", "IsActive" },
+                columnTypes: new[] { "int", "nvarchar(20)", "nvarchar(70)", "bit" }, // ADD THIS
                 values: new object[,]
                 {
-                    { 1, "university-admin", "$2a$11$bDZ.IOqfZCW9IXvNPzDmaOWhBkZ6LaYVRMHxLkxmXV6ZhUWNYP6sW", true },
+                    { 1, "university-admin", "$2a$11$y9J8rFwDESrMfhKNAho/peEU2Xn0grSwO6ZIlvt2HHG9YAZt1XFtC", true },
                 });
-            
+
+
             migrationBuilder.InsertData(
-                schema: "ums",
+                schema: "dbo",
                 table: "Faculties",
                 columns: new[] { "Id", "FacultyName", "IsActive" },
+                columnTypes: new[] { "int", "nvarchar(50)", "bit" }, // ADD THIS
                 values: new object[,]
                 {
                     { 1, "უნივერსიტეტის ადმინისტრაცია", true },
                 });
-            
+
             migrationBuilder.InsertData(
-                schema: "ums",
+                schema: "dbo",
                 table: "UserProfiles",
                 columns: new[] { "Id", "UserId", "FirstName", "LastName", "Age", "FacultyId" },
+                columnTypes: new[] { "int", "int", "nvarchar(50)", "nvarchar(50)", "int", "int" }, // ADD THIS
                 values: new object[,]
                 {
                     { 1, 1, "უნივერსიტეტის", "ადმინისტრატორი", 0, 1 },
@@ -289,39 +293,39 @@ namespace University.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "CoursesLecturers",
-                schema: "university");
+                schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "FacultyCourse",
-                schema: "university");
+                schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "UserProfiles",
-                schema: "ums");
+                schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "UsersCourses",
-                schema: "university");
+                schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "UsersLecturers",
-                schema: "university");
+                schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "Faculties",
-                schema: "university");
+                schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "Courses",
-                schema: "university");
+                schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "Lecturers",
-                schema: "ums");
+                schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "Users",
-                schema: "ums");
+                schema: "dbo");
         }
     }
 }

@@ -42,7 +42,7 @@ namespace University.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Courses", "university");
+                    b.ToTable("Courses", "dbo");
                 });
 
             modelBuilder.Entity("University.Data.Data.Entities.CourseLecturer", b =>
@@ -57,7 +57,7 @@ namespace University.Data.Migrations
 
                     b.HasIndex("LectureId");
 
-                    b.ToTable("CoursesLecturers", "university");
+                    b.ToTable("CoursesLecturers", "dbo");
                 });
 
             modelBuilder.Entity("University.Data.Data.Entities.Faculty", b =>
@@ -78,7 +78,7 @@ namespace University.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Faculties", "university");
+                    b.ToTable("Faculties", "dbo");
                 });
 
             modelBuilder.Entity("University.Data.Data.Entities.FacultyCourse", b =>
@@ -93,7 +93,7 @@ namespace University.Data.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.ToTable("FacultyCourse", "university");
+                    b.ToTable("FacultyCourse", "dbo");
                 });
 
             modelBuilder.Entity("University.Data.Data.Entities.Lecturer", b =>
@@ -122,7 +122,7 @@ namespace University.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Lecturers", "ums");
+                    b.ToTable("Lecturers", "dbo");
                 });
 
             modelBuilder.Entity("University.Data.Data.Entities.User", b =>
@@ -148,7 +148,7 @@ namespace University.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", "ums");
+                    b.ToTable("Users", "dbo");
                 });
 
             modelBuilder.Entity("University.Data.Data.Entities.UserCourse", b =>
@@ -163,7 +163,7 @@ namespace University.Data.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("UsersCourses", "university");
+                    b.ToTable("UsersCourses", "dbo");
                 });
 
             modelBuilder.Entity("University.Data.Data.Entities.UserLecturer", b =>
@@ -178,7 +178,7 @@ namespace University.Data.Migrations
 
                     b.HasIndex("LecturerId");
 
-                    b.ToTable("UsersLecturers", "university");
+                    b.ToTable("UsersLecturers", "dbo");
                 });
 
             modelBuilder.Entity("University.Data.Data.Entities.UserProfile", b =>
@@ -215,7 +215,7 @@ namespace University.Data.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("UserProfiles", "ums");
+                    b.ToTable("UserProfiles", "dbo");
                 });
 
             modelBuilder.Entity("University.Data.Data.Entities.CourseLecturer", b =>

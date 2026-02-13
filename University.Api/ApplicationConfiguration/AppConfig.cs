@@ -30,6 +30,12 @@ public static class AppConfig
 
         app.UseHttpsRedirection();
         app.UseRouting();
+
+        app.UseCors("AllowFrontend");
+
+        // Initialize Database
+        DatabaseInitializer.Initialize(app);
+
         app.UseAuthentication();
         app.UseAuthorization();
 

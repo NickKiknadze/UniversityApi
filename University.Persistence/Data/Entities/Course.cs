@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace University.Data.Data.Entities;
 
-[Table("Courses", Schema = "university")]
+[Table("Courses", Schema = "dbo")]
 public sealed class Course
 {
     [Key]

@@ -60,7 +60,6 @@ public class GlobalExceptionHandlingMiddleware
         var response = new
         {
             message = ex.Message,
-            innerException = ex.InnerException?.Message,
             status = statusCode
         };
 

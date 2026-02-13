@@ -1,0 +1,46 @@
+services:
+  university-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: university-db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Password123! # Change this for production
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P Password123! -C -Q 'SELECT 1' || exit 1" ]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 3s
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+  university-api:
+    build:
+      context: .
+      dockerfile: University.Api/Dockerfile
+    container_name: university-api
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=university-db;Database=UniversityDb;User Id=sa;Password=Password123!;TrustServerCertificate=True;
+      - ASPNETCORE_URLS=http://+:8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      university-db:
+        condition: service_healthy
+    restart: always
+
+  university-web:
+    build:
+      context: ./University.Web
+      dockerfile: Dockerfile
+    container_name: university-web
+    ports:
+      - "5173:80"
+    depends_on:
+      - university-api
+    restart: always
+
+volumes:
+  mssql_data:

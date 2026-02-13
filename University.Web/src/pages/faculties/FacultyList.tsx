@@ -80,7 +80,7 @@ export const FacultyList: React.FC = () => {
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                            {data?.items?.map((faculty: any) => (
+                            {data?.data?.map((faculty: any) => (
                                 <tr key={faculty.id}>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">#{faculty.id}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{faculty.facultyName}</td>
@@ -106,7 +106,7 @@ export const FacultyList: React.FC = () => {
                                     </td>
                                 </tr>
                             ))}
-                            {(!data?.items || data.items.length === 0) && (
+                            {(!data?.data || data.data.length === 0) && (
                                 <tr>
                                     <td colSpan={4} className="px-6 py-4 text-center text-sm text-gray-500">
                                         No faculties found.

@@ -158,7 +158,7 @@ export const UserForm: React.FC<UserFormProps> = ({ isOpen, onClose, initialData
                                 required
                             >
                                 <option value={0}>Select Faculty</option>
-                                {faculties?.items?.map((f: any) => (
+                                {faculties?.data?.map((f: any) => (
                                     <option key={f.id} value={f.id}>{f.facultyName}</option>
                                 ))}
                             </select>

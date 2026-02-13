@@ -30,6 +30,7 @@ public class AuthServices(IHttpContextAccessor httpContextAccessor, IUserReposit
     
     private static bool VerifyPassword(string? password, string hashedPassword)
     {
+        var test = BCrypt.Net.BCrypt.EnhancedHashPassword(password, BCrypt.Net.HashType.SHA384);
         return BCrypt.Net.BCrypt.EnhancedVerify(password, hashedPassword);
     }
 }
