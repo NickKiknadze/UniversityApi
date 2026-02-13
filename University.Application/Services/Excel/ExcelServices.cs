@@ -20,7 +20,7 @@ public class ExcelServices : IExcelServices
 
         worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
 
-        var exportedFileName = $"{fileName}_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+        var exportedFileName = $"{fileName}_{DateTime.UtcNow:yyyyMMdd_HHmmss}.xlsx";
 
         var result = await package.GetAsByteArrayAsync(cancellationToken);
 
@@ -58,7 +58,7 @@ public class ExcelServices : IExcelServices
 
         worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
 
-        var exportedFileName = $"{fileName}_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+        var exportedFileName = $"{fileName}_{DateTime.UtcNow:yyyyMMdd_HHmmss}.xlsx";
 
         var result = await package.GetAsByteArrayAsync(cancellationToken);
 

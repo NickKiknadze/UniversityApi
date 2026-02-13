@@ -8,10 +8,6 @@ public static class AppConfig
     {
         app.UseForwardedHeaders();
 
-        // if (env.IsDevelopment())
-        //     app.UseDeveloperExceptionPage();
-
-        
         app.UseSession();
         app.UseStaticFiles();
         app.UseSwagger();
@@ -33,7 +29,6 @@ public static class AppConfig
 
         app.UseCors("AllowFrontend");
 
-        // Initialize Database
         DatabaseInitializer.Initialize(app);
 
         app.UseAuthentication();

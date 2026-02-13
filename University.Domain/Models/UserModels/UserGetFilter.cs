@@ -1,4 +1,6 @@
-﻿namespace University.Domain.Models.UserModels;
+﻿using University.Domain.Enums;
+
+namespace University.Domain.Models.UserModels;
 
 public class UserGetFilter : Paging
 {
@@ -8,6 +10,7 @@ public class UserGetFilter : Paging
     public int? Age { get; set; }
     public int? FacultyId { get; set; }
     public bool IsActive { get; set; } = true;
+    public UserType? UserType { get; set; }
     public ICollection<int>? CourseIds { get; set; }
     public ICollection<int>? LecturerIds { get; set; }
 }

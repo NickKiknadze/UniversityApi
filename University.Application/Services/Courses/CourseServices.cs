@@ -51,7 +51,6 @@ public class CourseServices(ICourseRepository courseRepository) : ICourseService
     public async Task<int> Update(CoursePutDto input, CancellationToken cancellationToken)
     {
         var course = await courseRepository.All
-            .Include(c => c.UsersCourses)
             .Include(c => c.CoursesLecturers)
             .Include(x => x.FacultyCourses)
             .FirstOrDefaultAsync(c => c.Id == input.Id, cancellationToken);
@@ -69,7 +68,6 @@ public class CourseServices(ICourseRepository courseRepository) : ICourseService
     public async Task<int> Delete(int courseId, CancellationToken cancellationToken)
     {
         var course = await courseRepository.All
-            .Include(uc => uc.UsersCourses)
             .Include(cl => cl.CoursesLecturers)
             .Include(x => x.FacultyCourses)
             .FirstOrDefaultAsync(c => c.Id == courseId, cancellationToken);
@@ -77,7 +75,6 @@ public class CourseServices(ICourseRepository courseRepository) : ICourseService
         if (course == null)
             throw new NotFoundException("Course not found");
 
-        course.UsersCourses.Clear();
         course.CoursesLecturers.Clear();
         course.FacultyCourses.Clear();
         course.IsActive = false;

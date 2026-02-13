@@ -1,5 +1,4 @@
 ﻿using University.Data.Data.Entities;
-using University.Data.Repositories.Interfaces;
 using University.Domain.Models.FacultyModels;
 
 namespace University.Application.Services.Faculties.Helpers;

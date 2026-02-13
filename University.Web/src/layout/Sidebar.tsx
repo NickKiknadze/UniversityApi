@@ -1,20 +1,40 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, GraduationCap, Building2, Users, UserSquare2 } from 'lucide-react';
+import { LayoutDashboard, GraduationCap, Building2, Users, UserSquare2, Calendar, UserPlus } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export const Sidebar: React.FC = () => {
-    const navItems = [
-        { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
-        { to: '/faculties', icon: Building2, label: 'Faculties' },
-        { to: '/courses', icon: GraduationCap, label: 'Courses' },
-        { to: '/users', icon: Users, label: 'Students' },
-        { to: '/lecturers', icon: UserSquare2, label: 'Lecturers' },
+    const { role } = useAuth();
+
+    const allNavItems = [
+        { to: '/', icon: LayoutDashboard, label: 'Dashboard', roles: ['Admin', 'Lecturer', 'Student'] },
+        { to: '/faculties', icon: Building2, label: 'Faculties', roles: ['Admin'] },
+        { to: '/courses', icon: GraduationCap, label: 'Courses', roles: ['Admin'] },
+        { to: '/users', icon: Users, label: 'Users', roles: ['Admin'] },
+        { to: '/students', icon: GraduationCap, label: 'Students', roles: ['Admin'] },
+        { to: '/lecturers', icon: UserSquare2, label: 'Lecturers', roles: ['Admin'] },
+        { to: '/admin/register-user', icon: UserPlus, label: 'Register User', roles: ['Admin'] },
+        { to: '/timetable', icon: Calendar, label: 'Timetable', roles: ['Admin', 'Lecturer', 'Student'] },
+        { to: '/my-grades', icon: GraduationCap, label: 'My Grades', roles: ['Student'] },
+        { to: '/gradebook', icon: GraduationCap, label: 'Gradebook', roles: ['Lecturer'] },
+        { to: '/lecturer/assignments', icon: Users, label: 'Assignments', roles: ['Lecturer'] },
     ];
+
+    const navItems = allNavItems.filter(item => !item.roles || (role && item.roles.includes(role)));
 
     return (
         <aside className="w-64 bg-white border-r border-gray-200 min-h-screen hidden md:block">
-            <div className="p-6">
-                <h1 className="text-2xl font-bold text-blue-600">University App</h1>
+            <div className="p-6 border-b border-gray-100">
+                <h1 className="text-xl font-bold text-gray-900 flex items-center">
+                    <GraduationCap className="w-6 h-6 mr-2 text-blue-600" />
+                    University App
+                </h1>
+                {role && (
+                    <div className="mt-1 flex items-center">
+                        <div className={`w-2 h-2 rounded-full mr-2 ${role === 'Admin' ? 'bg-indigo-500' : role === 'Lecturer' ? 'bg-emerald-500' : 'bg-blue-500'}`}></div>
+                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">{role} Portal</p>
+                    </div>
+                )}
             </div>
             <nav className="mt-6">
                 {navItems.map((item) => (

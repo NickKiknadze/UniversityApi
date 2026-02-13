@@ -6,4 +6,8 @@ export const authService = {
         const response = await api.post<AuthTokenResponse>('/Auth/login', credentials);
         return response.data;
     },
+    register: async (data: any): Promise<AuthTokenResponse> => {
+        const response = await api.post<AuthTokenResponse>('/Auth/register', data);
+        return response.data;
+    },
 };

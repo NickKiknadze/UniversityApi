@@ -7,13 +7,6 @@ public static class FillCourseHelper
 {
     public static Course FillCourse(this Course course, CoursePostDto input)
     {
-        if (input.UserIds is { Count: > 0 })
-            foreach (var userId in input.UserIds)
-                course.UsersCourses.Add(new UserCourse
-                {
-                    UserId = userId,
-                    CourseId = course.Id
-                });
         
         if (input.FacultyIds is { Count: > 0 })
             foreach (var facultyId in input.FacultyIds)
@@ -28,7 +21,7 @@ public static class FillCourseHelper
         foreach (var lecturerId in input.LecturerIds)
             course.CoursesLecturers.Add(new CourseLecturer
             {
-                LectureId = lecturerId,
+                UserId = lecturerId,
                 CourseId = course.Id
             });
 
@@ -39,15 +32,6 @@ public static class FillCourseHelper
     {
         course.CourseName = input.CourseName;
 
-        course.UsersCourses.Clear();
-        
-        if (input.UserIds is {Count: > 0 })
-            foreach (var userId in input.UserIds)
-                course.UsersCourses.Add(new UserCourse
-                {
-                    UserId = userId,
-                    CourseId = course.Id
-                });
         
         course.FacultyCourses.Clear();
         
@@ -66,7 +50,7 @@ public static class FillCourseHelper
         foreach (var lecturerId in input.LecturerIds)
             course.CoursesLecturers.Add(new CourseLecturer
             {
-                LectureId = lecturerId,
+                UserId = lecturerId,
                 CourseId = course.Id
             });
 

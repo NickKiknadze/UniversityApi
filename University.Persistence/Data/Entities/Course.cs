@@ -11,7 +11,9 @@ public sealed class Course
     [MaxLength(50)]
     public required string CourseName { get; set; }
     public bool IsActive { get; set; } = true;
-    public ICollection<CourseLecturer> CoursesLecturers { get; set; } = new List<CourseLecturer>();
-    public ICollection<UserCourse> UsersCourses { get; set; } = new List<UserCourse>();
-    public ICollection<FacultyCourse> FacultyCourses { get; set; } = new List<FacultyCourse>();
+
+    public ICollection<FacultyCourse> FacultyCourses { get; set; } = new HashSet<FacultyCourse>();
+    public ICollection<CourseLecturer> CoursesLecturers { get; set; } = new HashSet<CourseLecturer>();
+    public ICollection<StudentCourse> StudentCourses { get; set; } = new HashSet<StudentCourse>();
+    public ICollection<Assignment> Assignments { get; set; } = new HashSet<Assignment>();
 }

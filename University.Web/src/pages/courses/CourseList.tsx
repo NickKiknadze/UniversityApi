@@ -80,7 +80,7 @@ export const CourseList: React.FC = () => {
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                            {data?.map((course: any) => (
+                            {data?.data.map((course: any) => (
                                 <tr key={course.id}>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">#{course.id}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{course.courseName}</td>
@@ -107,7 +107,7 @@ export const CourseList: React.FC = () => {
                                     </td>
                                 </tr>
                             ))}
-                            {(!data || data.length === 0) && (
+                            {(!data || data.data.length === 0) && (
                                 <tr>
                                     <td colSpan={4} className="px-6 py-4 text-center text-sm text-gray-500">
                                         No courses found.

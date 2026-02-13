@@ -6,7 +6,7 @@ import { X } from 'lucide-react';
 interface FacultyFormProps {
     isOpen: boolean;
     onClose: () => void;
-    initialData?: any; // Replace with type
+    initialData?: any;
 }
 
 export const FacultyForm: React.FC<FacultyFormProps> = ({ isOpen, onClose, initialData }) => {

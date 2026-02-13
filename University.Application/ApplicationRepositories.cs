@@ -1,13 +1,18 @@
-﻿namespace University.Application;
+﻿using University.Data.Repositories;
+using University.Data.Repositories.Interfaces;
+
+namespace University.Application;
 
 public static class ApplicationRepositories
 {
     public static void RegisterRepositoriesDependencyConfiguration(this IServiceCollection services)
     {
-        services.AddScoped(typeof(Data.Repositories.Interfaces.IGenericRepository<>), typeof(Data.Repositories.GenericRepository<>));
-        services.AddScoped<Data.Repositories.Interfaces.IUserRepository, Data.Repositories.UserRepository>();
-        services.AddScoped<Data.Repositories.Interfaces.IFacultyRepository, Data.Repositories.FacultyRepository>();
-        services.AddScoped<Data.Repositories.Interfaces.ICourseRepository, Data.Repositories.CourseRepository>();
-        services.AddScoped<Data.Repositories.Interfaces.ILecturerRepository, Data.Repositories.LecturerRepository>();
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IFacultyRepository, FacultyRepository>();
+        services.AddScoped<ICourseRepository, CourseRepository>();
+        services.AddScoped<IAssignmentRepository, AssignmentRepository>();
+        services.AddScoped<IStudentGradeRepository, StudentGradeRepository>();
+        services.AddScoped<IClassSessionRepository, ClassSessionRepository>();
     }
 }

@@ -26,12 +26,7 @@ public static class FilterDataHelper
         if(filter.LecturerIds is {Count: > 0})
         {
             query.Include(c => c.CoursesLecturers);
-            query = query.Where(c => c.CoursesLecturers.Any(cl => filter.LecturerIds.Contains(cl.LectureId)));
-        }
-        if (filter.UserIds == null || !filter.UserIds.Any()) return query;
-        {
-            query.Include(c => c.UsersCourses);
-            query = query.Where(c => c.UsersCourses.Any(uc => filter.UserIds.Contains(uc.CourseId)));
+            query = query.Where(c => c.CoursesLecturers.Any(cl => filter.LecturerIds.Contains(cl.UserId)));
         }
 
         return query;

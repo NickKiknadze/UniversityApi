@@ -56,16 +56,16 @@ public static class ConfigureBuilderHelper
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                    ValidAudience = builder.Configuration["Jwt:Audience"]
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    RoleClaimType = "/identity/claims/role"
                 };
             });
 
 
         builder.Services.AddAuthorization();
         
-        //Services
         builder.Services.RegisterServicesDependencyConfiguration();
-        //Repositories
+
         builder.Services.RegisterRepositoriesDependencyConfiguration();
 
         builder.Services.AddDistributedMemoryCache();

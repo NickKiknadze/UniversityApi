@@ -9,32 +9,24 @@ namespace University.Api.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
-public class FacultyController(IFacultyServices faultyServices)
-    : ControllerBase
+public class FacultyController(IFacultyServices faultyServices) : ControllerBase
 {
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<GetDtoWithCount<FacultyGetDto>>> GetFacultiesAsync(
         [FromQuery] FacultyGetFilter filter, CancellationToken cancellationToken)
-    {
-        return Ok(await faultyServices.Get(filter, cancellationToken));
-    }
+        => Ok(await faultyServices.Get(filter, cancellationToken));
 
     [HttpPost]
     public async Task<ActionResult<FacultyGetDto>> PostFacultyAsync(FacultyPostDto input,
         CancellationToken cancellationToken)
-    {
-        return Ok(await faultyServices.Create(input, cancellationToken));
-    }
+        => Ok(await faultyServices.Create(input, cancellationToken));
 
     [HttpPut]
     public async Task<ActionResult<bool>> PutFacultyAsync(FacultyPutDto input, CancellationToken cancellationToken)
-    {
-        return Ok(await faultyServices.Update(input, cancellationToken));
-    }
+        => Ok(await faultyServices.Update(input, cancellationToken));
 
     [HttpDelete]
     public async Task<ActionResult<bool>> DeleteFacultyAsync(int facultyId, CancellationToken cancellationToken)
-    {
-        return Ok(await faultyServices.Delete(facultyId, cancellationToken));
-    }
+        => Ok(await faultyServices.Delete(facultyId, cancellationToken));
 }

@@ -29,7 +29,7 @@ public static class BringUserToLoginPage
 
                         if (Authenticate(username, password))
                         {
-                            context.Session.SetString(cacheKey, DateTime.Now.ToString(CultureInfo.InvariantCulture));
+                            context.Session.SetString(cacheKey, DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
                             context.Response.Redirect("/swagger/index.html");
                             return;
                         }

@@ -14,4 +14,6 @@ public sealed class UserProfile
     [ForeignKey("Faculty")] public int FacultyId { get; set; }
     public User User { get; set; }
     public Faculty Faculty { get; set; }
+    [MaxLength(200)]
+    public string? ProfilePictureUrl { get; set; }
 }

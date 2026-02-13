@@ -6,7 +6,7 @@ namespace University.Data.Data.Entities;
 public sealed class CourseLecturer
 {
     public int CourseId { get; set; }
-    public int LectureId { get; set; }
+    public int UserId { get; set; }
     public Course Course { get; set; }
-    public Lecturer Lecturer { get; set; }
+    public User User { get; set; }
 }

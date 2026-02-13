@@ -17,7 +17,6 @@ export const CourseForm: React.FC<CourseFormProps> = ({ isOpen, onClose, initial
     const [selectedFaculties, setSelectedFaculties] = useState<number[]>([]);
     const [selectedLecturers, setSelectedLecturers] = useState<number[]>([]);
 
-    // Fetch options
     const { data: faculties } = useQuery({
         queryKey: ['faculties'],
         queryFn: () => facultiesService.getAll(),

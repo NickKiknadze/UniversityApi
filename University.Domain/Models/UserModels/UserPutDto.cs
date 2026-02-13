@@ -1,4 +1,6 @@
-﻿namespace University.Domain.Models.UserModels;
+﻿using University.Domain.Enums;
+
+namespace University.Domain.Models.UserModels;
 
 public class UserPutDto
 {
@@ -9,4 +11,6 @@ public class UserPutDto
     public int FacultyId { get; set; }
     public ICollection<int>? LecturerIds { get; set; }
     public ICollection<int>? CourseIds { get; set; }
+    public UserType UserType { get; set; }
+    public string? ProfilePictureUrl { get; set; }
 }

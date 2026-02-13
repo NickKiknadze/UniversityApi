@@ -4,7 +4,7 @@ import { type CourseGetDto, type CoursePostDto, type CoursePutDto, type ApiRespo
 export const coursesService = {
     getAll: async (filter?: any) => {
         const response = await api.get<ApiResponse<GetDtoWithCount<CourseGetDto[]>>>('/Course', { params: filter });
-        return response.data.data?.data || [];
+        return response.data.data!;
     },
     create: async (data: CoursePostDto) => {
         const response = await api.post<ApiResponse<CourseGetDto>>('/Course', data);

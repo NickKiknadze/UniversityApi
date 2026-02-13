@@ -1,22 +1,27 @@
 // Auth Models
 export interface AuthModel {
-    username?: string;
+    username: string;
     password?: string;
 }
 
 export interface AuthTokenResponse {
-    accessToken?: string;
+    accessToken: string;
     tokenType?: string;
     expiresIn?: number;
     refreshToken?: string;
     refreshTokenExpiresIn?: number;
+    userName?: string;
+    userId?: number;
+    userType?: number; // Added
+    roles?: string[];
 }
 
 export interface ApiResponse<T> {
     success: boolean;
     message?: string;
-    innerException?: string;
     data?: T;
+    errors?: string[];
+    count?: number;
 }
 
 export interface GetDtoWithCount<T> {
@@ -31,6 +36,14 @@ export interface PagedResult<T> {
 }
 
 // User Models
+export const UserType = {
+    Admin: 0,
+    Student: 1,
+    Lecturer: 2
+} as const;
+
+export type UserType = (typeof UserType)[keyof typeof UserType];
+
 export interface UserOnlyDto {
     id: number;
     firstName: string;
@@ -41,7 +54,10 @@ export interface UserOnlyDto {
 export interface UserGetDto extends UserOnlyDto {
     faculty?: FacultyOnlyDto;
     lecturers: LecturerOnlyDto[];
+    students?: UserOnlyDto[]; // Added for lecturer's students
     courses: CourseOnlyDto[];
+    profilePictureUrl?: string;
+    userType: UserType;
 }
 
 export interface UserPostDto {
@@ -51,8 +67,10 @@ export interface UserPostDto {
     age: number;
     facultyId: number;
     password?: string;
+    userType: UserType;
     courseIds?: number[];
     lecturerIds?: number[];
+    profilePictureUrl?: string;
 }
 
 export interface UserPutDto extends UserPostDto {
@@ -104,24 +122,67 @@ export interface CoursePutDto extends CoursePostDto {
 // Lecturer Models
 export interface LecturerOnlyDto {
     id: number;
-    name: string;
-    surName: string;
+    firstName: string;
+    lastName: string;
     age: number;
+    email?: string;
 }
 
-export interface LecturerGetDto extends LecturerOnlyDto {
-    users: UserOnlyDto[];
-    courses: CourseOnlyDto[];
-}
 
-export interface LecturerPostDto {
-    name: string;
-    surName: string;
-    age: number; // Assuming age is required based on GET DTO
-    courseIds?: number[];
-    userIds?: number[];
-}
 
-export interface LecturerPutDto extends LecturerPostDto {
+
+
+// Assignment Models
+export interface Assignment {
     id: number;
+    title: string;
+    description?: string;
+    courseId: number;
+    courseName?: string;
+    maxPoints: number;
+    dueDate?: string;
+}
+
+export interface Grade {
+    id: number;
+    assignmentId: number;
+    assignmentTitle: string;
+    userId: number;
+    userName: string;
+    points: number;
+    feedback?: string;
+    gradedDate: string;
+}
+
+// Schedule Models
+export interface ClassSession {
+    id: number;
+    courseId: number;
+    courseName?: string;
+    dayOfWeek: number; // 0 = Sunday, 1 = Monday, etc.
+    startTime: string; // "HH:mm:ss"
+    endTime: string; // "HH:mm:ss"
+    location: string;
+}
+
+export interface ClassSessionPostDto {
+    courseId: number;
+    dayOfWeek: number;
+    startTime: string;
+    endTime: string;
+    location: string;
+}
+
+export interface ClassSessionPutDto extends ClassSessionPostDto {
+    id: number;
+}
+
+export interface ScheduleGetFilter {
+    courseId?: number;
+    userId?: number;
+    studentId?: number;
+    lecturerId?: number;
+    dayOfWeek?: number;
+    offset?: number;
+    limit?: number;
 }

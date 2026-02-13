@@ -1,4 +1,5 @@
-﻿using University.Data.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using University.Data.Data.Entities;
 using University.Domain.Models.CourseModels;
 using University.Domain.Models.FacultyModels;
 using University.Domain.Models.LecturerModels;
@@ -10,7 +11,11 @@ public static class DataMapper
 {
     public static IQueryable<CourseGetDto> MapToCourseGetDto(this IQueryable<Course> courses)
     {
-        return courses.Select(course => new CourseGetDto
+        return courses
+            .Include(x => x.FacultyCourses)
+            .Include(x => x.CoursesLecturers)
+            .Include(x => x.StudentCourses)
+            .Select(course => new CourseGetDto
         {
             Id = course.Id,
             CourseName = course.CourseName,
@@ -22,22 +27,22 @@ public static class DataMapper
                     FacultyName = c.Faculty.FacultyName
                 }).ToList(),
             Lecturers = course.CoursesLecturers
-                .Where(x => x.Course.IsActive)
+                .Where(x => x.User.IsActive)
                 .Select(c => new LecturerOnlyDto
-                {
-                    Id = c.Lecturer.Id,
-                    Name = c.Lecturer.Name,
-                    SurName = c.Lecturer.SurName,
-                    Age = c.Lecturer.Age
-                }).ToList(),
-            Users = course.UsersCourses
-                .Where(uc => uc.User.IsActive)
-                .Select(c => new UserOnlyDto
                 {
                     Id = c.User.Id,
                     FirstName = c.User.UserProfile.FirstName,
                     LastName = c.User.UserProfile.LastName,
                     Age = c.User.UserProfile.Age
+                }).ToList(),
+            Users = course.StudentCourses
+                .Where(sc => sc.User.IsActive)
+                .Select(sc => new UserOnlyDto
+                {
+                    Id = sc.User.Id,
+                    FirstName = sc.User.UserProfile.FirstName,
+                    LastName = sc.User.UserProfile.LastName,
+                    Age = sc.User.UserProfile.Age
                 }).ToList()
         });
     }

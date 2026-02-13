@@ -9,16 +9,14 @@ var app = builder.Build();
 
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
-app.UseAuthentication();
-app.UseAuthorization();
-
 app.ConfigureApp(app.Environment);
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseStaticFiles();
 
-app.MapControllers();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

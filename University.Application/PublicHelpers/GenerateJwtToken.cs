@@ -2,20 +2,14 @@
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using University.Application.Services.Auth.Helpers;
-using University.Data.Repositories.Interfaces;
 using University.Domain.Models.AuthModels;
 
 namespace University.Application.PublicHelpers;
 
 public static class GenerateJwtToken
 {
-    public static async Task<AuthTokenResponse> Execute(AuthModel request, 
-        IConfiguration configuration, IUserRepository userRepository,
-        CancellationToken cancellationToken)
+    public static AuthTokenResponse Execute(SignInUserModel user, IConfiguration configuration)
     {
-        var user = await userRepository.GetAuthUserModel(request, cancellationToken);
-
         Claim[]? claims = null;
         
         if (user != null)
@@ -30,7 +24,8 @@ public static class GenerateJwtToken
                     user.Role ?? "N/A"),
                 new Claim(UniversityClaimTypes.Department,
                     user.Department ?? "N/A"),
-                new Claim(UniversityClaimTypes.Extension, user.Extension ?? "N/A")
+                new Claim(UniversityClaimTypes.Extension, user.Extension ?? "N/A"),
+                new Claim("Avatar", user.AvatarImage ?? "")
             ];
         }
         

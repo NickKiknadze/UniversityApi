@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using University.Domain.Enums;
 
 namespace University.Data.Data.Entities;
 
@@ -13,9 +14,13 @@ public sealed class User
     [MaxLength(70)]
     public required string PasswordHash { get; set; }
     public bool IsActive { get; set; } = true;
-    public bool IsAdmin { get; set; } = false;
+    public UserType UserType { get; set; } = UserType.Student;
 
-    public ICollection<UserLecturer> UsersLecturers { get; set; } = new HashSet<UserLecturer>();
-    public ICollection<UserCourse> UsersCourses { get; set; } = new HashSet<UserCourse>();
-    public UserProfile UserProfile { get; set; }
+    public UserProfile? UserProfile { get; set; }
+
+    public ICollection<StudentCourse> StudentCourses { get; set; } = new HashSet<StudentCourse>();
+    public ICollection<CourseLecturer> CoursesLecturers { get; set; } = new HashSet<CourseLecturer>();
+    public ICollection<StudentGrade> StudentGrades { get; set; } = new HashSet<StudentGrade>();
+    public ICollection<StudentLecturer> StudentLecturersAsStudent { get; set; } = new HashSet<StudentLecturer>();
+    public ICollection<StudentLecturer> StudentLecturersAsLecturer { get; set; } = new HashSet<StudentLecturer>();
 }
