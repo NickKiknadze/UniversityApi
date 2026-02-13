@@ -13,6 +13,7 @@ public static class DataMapper
         return courses.Select(course => new CourseGetDto
         {
             Id = course.Id,
+            CourseName = course.CourseName,
             Faculties = course.FacultyCourses
                 .Where(ul => ul.Faculty.IsActive)
                 .Select(c => new FacultyOnlyDto

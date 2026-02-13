@@ -8,7 +8,7 @@ public static class FilterDataHelper
 {
     public static IQueryable<User> FilterData(this IQueryable<User> query, UserGetFilter filter)
     {
-        query = query.Where(u => u.IsActive == filter.IsActive);
+        query = query.Where(u => u.IsActive == filter.IsActive && !u.IsAdmin);
         
         if (filter.Id != null)
         {

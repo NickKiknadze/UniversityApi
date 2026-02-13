@@ -13,7 +13,8 @@ public sealed class User
     [MaxLength(70)]
     public required string PasswordHash { get; set; }
     public bool IsActive { get; set; } = true;
-        
+    public bool IsAdmin { get; set; } = false;
+
     public ICollection<UserLecturer> UsersLecturers { get; set; } = new HashSet<UserLecturer>();
     public ICollection<UserCourse> UsersCourses { get; set; } = new HashSet<UserCourse>();
     public UserProfile UserProfile { get; set; }
