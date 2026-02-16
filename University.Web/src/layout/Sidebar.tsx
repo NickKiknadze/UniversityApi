@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, GraduationCap, Building2, Users, UserSquare2, Calendar, UserPlus } from 'lucide-react';
+import { LayoutDashboard, GraduationCap, Building2, Users, UserSquare2, Calendar, UserPlus, FileText } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export const Sidebar: React.FC = () => {
@@ -17,7 +17,7 @@ export const Sidebar: React.FC = () => {
         { to: '/timetable', icon: Calendar, label: 'Timetable', roles: ['Admin', 'Lecturer', 'Student'] },
         { to: '/my-grades', icon: GraduationCap, label: 'My Grades', roles: ['Student'] },
         { to: '/gradebook', icon: GraduationCap, label: 'Gradebook', roles: ['Lecturer'] },
-        { to: '/lecturer/assignments', icon: Users, label: 'Assignments', roles: ['Lecturer'] },
+        { to: '/assignments', icon: FileText, label: 'Assignments', roles: ['Admin', 'Lecturer', 'Student'] },
     ];
 
     const navItems = allNavItems.filter(item => !item.roles || (role && item.roles.includes(role)));

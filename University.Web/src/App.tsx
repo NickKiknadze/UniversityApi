@@ -13,9 +13,8 @@ import { LecturerDashboard } from './pages/LecturerDashboard';
 import { GradeGradebook } from './pages/grades/GradeGradebook';
 import { StudentGrades } from './pages/grades/StudentGrades';
 import { Timetable } from './pages/schedule/Timetable';
-import { LecturerAssignments } from './pages/lecturers/LecturerAssignments';
-import { LecturerSchedule } from './pages/lecturers/LecturerSchedule';
 import { AdminUserRegistration } from './pages/admin/AdminUserRegistration';
+import { AssignmentList } from './pages/assignments/AssignmentList';
 
 const queryClient = new QueryClient();
 
@@ -36,12 +35,11 @@ function App() {
                 <Route path="/students" element={<UserList title="Students" requiredRole={UserType.Student} />} />
                 <Route path="/lecturers" element={<UserList title="Lecturers" requiredRole={UserType.Lecturer} />} />
                 <Route path="/lecturer-dashboard" element={<LecturerDashboard />} />
-                <Route path="/lecturer/assignments" element={<LecturerAssignments />} />
-                <Route path="/lecturer/schedule" element={<LecturerSchedule />} />
                 <Route path="/gradebook" element={<GradeGradebook />} />
                 <Route path="/my-grades" element={<StudentGrades />} />
                 <Route path="/timetable" element={<Timetable />} />
                 <Route path="/admin/register-user" element={<AdminUserRegistration />} />
+                <Route path="/assignments" element={<AssignmentList />} />
               </Route>
             </Route>
 

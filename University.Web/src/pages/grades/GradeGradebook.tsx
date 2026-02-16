@@ -34,7 +34,7 @@ export const GradeGradebook: React.FC = () => {
         queryFn: async () => {
             if (!selectedAssignmentId) return [];
             const response = await gradesService.getAll({ assignmentId: selectedAssignmentId });
-            return response.data;
+            return response.data?.data || [];
         },
         enabled: !!selectedAssignmentId,
     });
@@ -99,7 +99,7 @@ export const GradeGradebook: React.FC = () => {
                                 {grades?.map((grade) => (
                                     <tr key={grade.id}>
                                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                            {grade.studentName}
+                                            {grade.userName}
                                         </td>
                                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             {grade.points}

@@ -147,6 +147,7 @@ export const UserList: React.FC<UserListProps> = ({ title = 'Users', requiredRol
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 initialData={selectedUser}
+                defaultRole={requiredRole}
             />
         </div>
     );

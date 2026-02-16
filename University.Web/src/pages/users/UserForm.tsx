@@ -11,9 +11,10 @@ interface UserFormProps {
     isOpen: boolean;
     onClose: () => void;
     initialData?: any;
+    defaultRole?: UserType;
 }
 
-export const UserForm: React.FC<UserFormProps> = ({ isOpen, onClose, initialData }) => {
+export const UserForm: React.FC<UserFormProps> = ({ isOpen, onClose, initialData, defaultRole }) => {
     const queryClient = useQueryClient();
     const [formData, setFormData] = useState<{
         username: string;
@@ -30,8 +31,9 @@ export const UserForm: React.FC<UserFormProps> = ({ isOpen, onClose, initialData
         age: 18,
         password: '',
         facultyId: 0,
-        userType: UserType.Student,
+        userType: defaultRole ?? UserType.Student,
     });
+
     const [selectedCourses, setSelectedCourses] = useState<number[]>([]);
     const [selectedLecturers, setSelectedLecturers] = useState<number[]>([]);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -67,14 +69,15 @@ export const UserForm: React.FC<UserFormProps> = ({ isOpen, onClose, initialData
                 age: 18,
                 password: '',
                 facultyId: 0,
-                userType: UserType.Student,
+                userType: defaultRole ?? UserType.Student,
             });
             setSelectedCourses([]);
             setSelectedLecturers([]);
             setSelectedFile(null);
             setPreviewUrl(null);
         }
-    }, [initialData]);
+    }, [initialData, isOpen, defaultRole]);
+    // ... (skip unchanged lines)
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -246,7 +249,7 @@ export const UserForm: React.FC<UserFormProps> = ({ isOpen, onClose, initialData
                                 onChange={(e) => setFormData({ ...formData, userType: Number(e.target.value) as UserType })}
                                 className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                                 required
-                                disabled={!!initialData}
+                                disabled={!!initialData || defaultRole !== undefined}
                             >
                                 <option value={UserType.Student}>Student</option>
                                 <option value={UserType.Lecturer}>Lecturer</option>

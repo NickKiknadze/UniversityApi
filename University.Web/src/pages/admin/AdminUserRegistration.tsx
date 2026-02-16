@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { authService } from '../../api/auth';
-import { studentsService } from '../../api/students';
-import { lecturersService } from '../../api/lecturers';
 import { coursesService } from '../../api/courses';
 import { facultiesService } from '../../api/faculties';
+import { UserType } from '../../types';
 import { UserPlus, Check } from 'lucide-react';
 
 type UserRole = 'None' | 'Student' | 'Lecturer';
@@ -36,6 +35,8 @@ export const AdminUserRegistration: React.FC = () => {
 
     const registerMutation = useMutation({
         mutationFn: async (data: typeof formData & { role: UserRole; courseIds: number[] }) => {
+            const userType = data.role === 'Student' ? UserType.Student : data.role === 'Lecturer' ? UserType.Lecturer : UserType.Admin;
+
             const userResponse = await authService.register({
                 userName: data.userName,
                 password: data.password,
@@ -43,26 +44,11 @@ export const AdminUserRegistration: React.FC = () => {
                 lastName: data.lastName,
                 age: data.age,
                 facultyId: data.facultyId,
+                userType: userType,
+                courseIds: data.courseIds,
             });
 
-            const tokenStr = userResponse.accessToken;
-            const payload = JSON.parse(atob(tokenStr.split('.')[1]));
-            const userId = parseInt(payload["/identity/claims/sid"]);
-
-            if (data.role === 'Student') {
-                await studentsService.create({
-                    userId: userId,
-                    courseIds: data.courseIds,
-                });
-            } else if (data.role === 'Lecturer') {
-                await lecturersService.create({
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    age: data.age,
-                    userId: userId,
-                    courseIds: data.courseIds,
-                });
-            }
+            return userResponse;
 
             return userResponse;
         },
@@ -80,8 +66,6 @@ export const AdminUserRegistration: React.FC = () => {
             setSelectedRole('None');
             setSelectedCourses([]);
             queryClient.invalidateQueries({ queryKey: ['users'] });
-            queryClient.invalidateQueries({ queryKey: ['students'] });
-            queryClient.invalidateQueries({ queryKey: ['lecturers'] });
         },
         onError: (err: any) => {
             setError(err.response?.data?.message || 'Registration failed');

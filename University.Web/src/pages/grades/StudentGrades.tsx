@@ -10,8 +10,8 @@ export const StudentGrades: React.FC = () => {
         queryKey: ['myGrades', user?.id],
         queryFn: async () => {
             if (!user?.id) return [];
-            const response = await gradesService.getAll({ studentId: user.id });
-            return response.data;
+            const response = await gradesService.getAll({ userId: user.id });
+            return response.data?.data || [];
         },
         enabled: !!user?.id,
     });

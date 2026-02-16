@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { coursesService } from '../../api/courses';
 import { facultiesService } from '../../api/faculties';
-import { lecturersService } from '../../api/lecturers';
+import { usersService } from '../../api/users';
+import { UserType } from '../../types';
 import { X, Check } from 'lucide-react';
 
 interface CourseFormProps {
@@ -24,7 +25,7 @@ export const CourseForm: React.FC<CourseFormProps> = ({ isOpen, onClose, initial
 
     const { data: lecturers } = useQuery({
         queryKey: ['lecturers'],
-        queryFn: () => lecturersService.getAll(),
+        queryFn: () => usersService.getAll({ UserType: UserType.Lecturer, IsActive: true })
     });
 
     useEffect(() => {
@@ -37,7 +38,7 @@ export const CourseForm: React.FC<CourseFormProps> = ({ isOpen, onClose, initial
             setSelectedFaculties([]);
             setSelectedLecturers([]);
         }
-    }, [initialData]);
+    }, [initialData, isOpen]);
 
     const mutation = useMutation({
         mutationFn: async (data: any) => {
@@ -126,7 +127,7 @@ export const CourseForm: React.FC<CourseFormProps> = ({ isOpen, onClose, initial
                                         <div className={`w-4 h-4 mr-3 border rounded flex items-center justify-center ${selectedLecturers.includes(lecturer.id) ? 'bg-blue-600 border-blue-600' : 'border-gray-300'}`}>
                                             {selectedLecturers.includes(lecturer.id) && <Check className="w-3 h-3 text-white" />}
                                         </div>
-                                        <span>{lecturer.name} {lecturer.surName}</span>
+                                        <span>{lecturer.firstName} {lecturer.lastName}</span>
                                     </div>
                                 ))}
                             </div>

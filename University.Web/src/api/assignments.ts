@@ -1,5 +1,5 @@
 import axios from './axios';
-import type { ApiResponse, Assignment } from '../types';
+import type { ApiResponse, Assignment, GetDtoWithCount } from '../types';
 
 export interface AssignmentPostDto {
     title: string;
@@ -22,9 +22,9 @@ export interface AssignmentGetFilter {
 }
 
 const assignmentsService = {
-    getAll: async (filter: AssignmentGetFilter): Promise<ApiResponse<Assignment[]>> => {
-        const response = await axios.get<ApiResponse<Assignment[]>>('/Assignments', { params: filter });
-        return response.data;
+    getAll: async (filter: AssignmentGetFilter): Promise<GetDtoWithCount<Assignment[]>> => {
+        const response = await axios.get<ApiResponse<GetDtoWithCount<Assignment[]>>>('/Assignments', { params: filter });
+        return response.data.data!;
     },
 
     getById: async (id: number): Promise<Assignment> => {
